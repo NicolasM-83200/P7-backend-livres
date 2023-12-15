@@ -1,7 +1,6 @@
 // Importation des modules
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config({ path: "./config/.env" });
 const path = require("path");
 
 // Importation des routes
@@ -10,14 +9,12 @@ const userRoutes = require("./routes/user.routes");
 
 // Connexion à la base de données MongoDB
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USER_PASS}@monvieuxgrimoire.ewzryox.mongodb.net/?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(process.env.URI_MONGODB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() =>
-    console.log("Connexion à MongoDB échouée !", process.env.DB_USER_PASS)
-  );
+  .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Création de l'application Express
 const app = express();
