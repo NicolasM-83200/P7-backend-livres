@@ -1,6 +1,5 @@
 const express = require("express");
 const auth = require("../middleware/auth");
-const multer = require("../middleware/multer-config");
 const bookCtrl = require("../controllers/book.controller");
 const sharp = require("../middleware/sharp-config");
 
@@ -8,11 +7,17 @@ const sharp = require("../middleware/sharp-config");
 const router = express.Router();
 
 router.get("/", bookCtrl.getAllBooks);
+router.get("/bestrating", bookCtrl.getBestRating);
 router.get("/:id", bookCtrl.getOneBook);
-// route GET /api/books/bestrating
-router.post("/", auth, multer, sharp.compressImage, bookCtrl.createBook);
-router.put("/:id", auth, multer, sharp.compressImage, bookCtrl.modifyBook);
+router.post("/", auth, sharp.upload, sharp.compressImage, bookCtrl.createBook);
+router.post("/:id/rating", auth, bookCtrl.rateBook);
+router.put(
+  "/:id",
+  auth,
+  sharp.upload,
+  sharp.compressImage,
+  bookCtrl.modifyBook
+);
 router.delete("/:id", auth, bookCtrl.deleteBook);
-// route POST /api/books/:id/rating
 
 module.exports = router;
