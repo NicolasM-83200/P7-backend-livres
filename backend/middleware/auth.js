@@ -8,14 +8,12 @@ module.exports = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     // on extrait l'ID utilisateur du token
     const userId = decodedToken.userId;
-    // si la demande contient un ID utilisateur, on le compare à celui extrait du token
+    // On ajoute l'ID utilisateur à l'objet req.auth afin de le rendre accessible dans les middlewares
     req.auth = {
       userId: userId,
     };
     next();
   } catch {
-    res.status(401).json({
-      error: new Error("Requête non authentifiée !"),
-    });
+    res.status(401).json({ error });
   }
 };
