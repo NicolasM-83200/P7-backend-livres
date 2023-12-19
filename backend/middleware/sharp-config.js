@@ -19,8 +19,8 @@ const compressImage = async (req, res, next) => {
 
   // On compresse l'image
   await sharp(req.file.buffer)
-    .toFormat("webp")
-    .webp({ quality: 80 })
+    .resize(null, 560)
+    .webp({ lossless: true })
     .toFile(path);
 
   // On ajoute le nom du fichier à la requête
