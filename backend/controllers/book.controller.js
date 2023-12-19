@@ -108,7 +108,7 @@ exports.rateBook = async (req, res, next) => {
   const rating = req.body.rating;
   try {
     // On récupère le livre grâce à son ID
-    const book = await Book.findOne({ _id: bookId });
+    const book = await Book.findById(bookId);
     // On vérifie si l'utilisateur a déjà noté le livre
     const ratingIndex = book.ratings.findIndex(
       (rating) => rating.userId === userId
@@ -126,8 +126,8 @@ exports.rateBook = async (req, res, next) => {
       book.ratings.length;
     book.averageRating = averageRating;
     // On met à jour le livre
-    await Book.updateOne({ _id: bookId }, book);
-    res.status(200).json({ book });
+    await book.save();
+    res.status(200).json(book);
   } catch (error) {
     res.status(400).json({ error });
   }
