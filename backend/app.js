@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
+const helmet = require("helmet");
 
 // Importation des routes
 const bookRoutes = require("./routes/book.routes");
@@ -19,6 +20,9 @@ const app = express();
 
 // Middleware qui permet de parser les requêtes envoyées par le client
 app.use(express.json());
+
+// Middleware qui sécurise les en-têtes HTTP
+app.use(helmet());
 
 // Middleware qui autorise les requêtes cross-origin (CORS)
 app.use(cors());
