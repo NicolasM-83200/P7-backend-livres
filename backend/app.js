@@ -22,7 +22,7 @@ const app = express();
 app.use(express.json());
 
 // Middleware qui sécurise les en-têtes HTTP
-app.use(helmet());
+app.use(helmet({ crossOriginResourcePolicy: false }));
 
 // Middleware qui autorise les requêtes cross-origin (CORS)
 app.use(cors());
