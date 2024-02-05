@@ -10,3 +10,6 @@ La bibliothèque souhaitant avoir ce site se nomme "Le Vieux Grimoire".
 Pour construire cet Api j'ai utilisé NodeJs ainsi que Express et MongoDB pour la base de données en NoSQL.
 Il a fallut initialiser le serveur sous Node, créer un model de données conforme aux spécificités techniques, construire les différents routes (user, book) de notre application.
 Et sécuriser la base de données en ajoutant des fonctions middleware telles que Helmet pour sécuriser les requêttes HTTP ainsi que "cors" pour accepter les requêttes provenant de toutes origines.
+
+### Pour démarrer le projet se rendre dans le dossier frontend, lancer la commande "npm start"
+### Ensuite aller dans le dossier backend et lancer la commande "npm start"
